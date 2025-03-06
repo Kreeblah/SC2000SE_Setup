@@ -926,6 +926,12 @@ begin
     FileSource := 'Z:';
     Exit;
   end;
+
+  if CheckDiscStructureForFiles('Z:\Volumes\SC2KSEPC') then
+  begin
+    FileSource := 'Z:\Volumes\SC2KSEPC';
+    Exit;
+  end;
 end;
 
 procedure InitializeWizard;
