@@ -3,6 +3,11 @@
 #define MyAppPublisher "Maxis"
 #define MyAppURL "https://www.ea.com/games/simcity/simcity-2000"
 
+; Valid values are "distributed" for cities and SCURK art in the
+; user's documents directory, or "combined" for an installation
+; mirroring the original installer's layout
+#define InstallLocationType "combined"
+
 [Setup]
 AppId={{7D8E893D-69BD-438B-A8EE-865A664834AB}
 AppName={#MyAppName}
@@ -49,24 +54,24 @@ Source: "{code:GetFileSource}\WIN95\SC2K\SIMCITY.EXE"; DestDir: "{app}"; Flags:e
 Source: "{code:GetFileSource}\WIN95\SC2K\SMACKW32.DLL"; DestDir: "{app}"; Flags:external; Components: sc2k;
 Source: "{code:GetFileSource}\WIN95\SC2K\VERSION.INF"; DestDir: "{app}"; Flags:external; Components: sc2k;
 
-Source: "{code:GetFileSource}\WIN95\SC2K\SCENARIO\*"; DestDir: "{app}\Scenario\"; Flags:external; Components: sc2k;
-Source: "{code:GetFileSource}\DATA\*"; DestDir: "{app}\Movies\"; Flags:external; Components: sc2k;
+Source: "{code:GetFileSource}\WIN95\SC2K\SCENARIO\*"; DestDir: "{app}\SCENARIO\"; Flags:external; Components: sc2k;
+Source: "{code:GetFileSource}\DATA\*"; DestDir: "{app}\MOVIES\"; Flags:external; Components: sc2k;
 
 Source: "{code:GetFileSource}\WIN95\SC2K\SCURK.HLP"; DestDir: "{app}"; Flags:external; Components: scurk;
 Source: "{code:GetFileSource}\WIN95\SC2K\SCURKUSA.DLL"; DestDir: "{app}"; Flags:external; Components: scurk;
 Source: "{code:GetFileSource}\WIN95\SC2K\SVERSION.INF"; DestDir: "{app}"; Flags:external; Components: scurk;
 Source: "{code:GetFileSource}\WIN95\SC2K\WINSCURK.EXE"; DestDir: "{app}"; Flags:external; Components: scurk;
 
-Source: "{code:GetFileSource}\WIN95\SC2K\SCURKART\*"; DestDir: "{userdocs}\SimCity 2000 Special Edition\SCURK Art\"; Flags:external uninsneveruninstall; Components: scurk;
+Source: "{code:GetFileSource}\WIN95\SC2K\SCURKART\*"; DestDir: "{code:GetUserDataInstallDirectory|{#InstallLocationType}}\SCURKART\"; Flags:external uninsneveruninstall; Components: scurk;
 
 Source: "{code:GetFileSource}\WIN95\SC2K\TILES.DB"; DestDir: "{app}"; Flags:external; Components: sc2k scurk;
-Source: "{code:GetFileSource}\WIN95\SC2K\BITMAPS\*"; DestDir: "{app}\Bitmaps\"; Flags:external; Components: sc2k scurk;
-Source: "{code:GetFileSource}\WIN95\SC2K\DATA\*"; DestDir: "{app}\Data\"; Flags:external; Components: sc2k scurk;
-Source: "{code:GetFileSource}\WIN95\SC2K\SOUNDS\*"; DestDir: "{app}\Sounds\"; Flags:external; Components: sc2k scurk;
+Source: "{code:GetFileSource}\WIN95\SC2K\BITMAPS\*"; DestDir: "{app}\BITMAPS\"; Flags:external; Components: sc2k scurk;
+Source: "{code:GetFileSource}\WIN95\SC2K\DATA\*"; DestDir: "{app}\DATA\"; Flags:external; Components: sc2k scurk;
+Source: "{code:GetFileSource}\WIN95\SC2K\SOUNDS\*"; DestDir: "{app}\SOUNDS\"; Flags:external; Components: sc2k scurk;
 
-Source: "{code:GetFileSource}\WIN95\SC2K\CITIES\*"; DestDir: "{userdocs}\SimCity 2000 Special Edition\Cities\"; Flags:external uninsneveruninstall; Components: sc2k scurk;
+Source: "{code:GetFileSource}\WIN95\SC2K\CITIES\*"; DestDir: "{code:GetUserDataInstallDirectory|{#InstallLocationType}}\CITIES\"; Flags:external uninsneveruninstall; Components: sc2k scurk;
 
-Source: "{code:GetFileSource}\WIN95\GOODIES\*"; DestDir: "{app}\Goodies\"; Flags: external recursesubdirs; Components: goodies;
+Source: "{code:GetFileSource}\WIN95\GOODIES\*"; DestDir: "{app}\GOODIES\"; Flags: external recursesubdirs; Components: goodies;
 
 Source: "{tmp}\winmm.dll"; DestDir: "{app}"; Flags: external; Components: fixes;
 
@@ -78,20 +83,21 @@ Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Version"; ValueType: dword; Val
 Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Version"; ValueType: dword; ValueName: "SCURK"; ValueData: "$00000100"; Flags: uninsdeletekey; Components: scurk
 
 Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Home"; ValueData: "{app}"; Flags: uninsdeletekey; Components: sc2k scurk
-Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Graphics"; ValueData: "{app}\Bitmaps"; Flags: uninsdeletekey; Components: sc2k scurk
-Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Music"; ValueData: "{app}\Sounds"; Flags: uninsdeletekey; Components: sc2k scurk
-Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Data"; ValueData: "{app}\Data"; Flags: uninsdeletekey; Components: sc2k scurk
-Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Goodies"; ValueData: "{app}\Goodies"; Flags: uninsdeletekey; Components: sc2k scurk
-Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Scenarios"; ValueData: "{app}\Scenario"; Flags: uninsdeletekey; Components: sc2k scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Graphics"; ValueData: "{app}\BITMAPS"; Flags: uninsdeletekey; Components: sc2k scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Music"; ValueData: "{app}\SOUNDS"; Flags: uninsdeletekey; Components: sc2k scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Data"; ValueData: "{app}\DATA"; Flags: uninsdeletekey; Components: sc2k scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Goodies"; ValueData: "{app}\GOODIES"; Flags: uninsdeletekey; Components: sc2k scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Scenarios"; ValueData: "{app}\SCENARIO"; Flags: uninsdeletekey; Components: sc2k scurk
 
-Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Cities"; ValueData: "{userdocs}\SimCity 2000 Special Edition\Cities"; Flags: uninsdeletekey; Components: sc2k scurk
-Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "SaveGame"; ValueData: "{userdocs}\SimCity 2000 Special Edition\Cities"; Flags: uninsdeletekey; Components: sc2k scurk
-Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "TileSets"; ValueData: "{userdocs}\SimCity 2000 Special Edition\SCURK Art"; Flags: uninsdeletekey; Components: scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Cities"; ValueData: "{code:GetUserDataInstallDirectory|{#InstallLocationType}}\CITIES"; Flags: uninsdeletekey; Components: sc2k scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "SaveGame"; ValueData: "{code:GetUserDataInstallDirectory|{#InstallLocationType}}\CITIES"; Flags: uninsdeletekey; Components: sc2k scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "TileSets"; ValueData: "{code:GetUserDataInstallDirectory|{#InstallLocationType}}\SCURKART"; Flags: uninsdeletekey; Components: scurk
 
 Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Localize"; ValueType: string; ValueName: "Language"; ValueData: "USA"; Flags: uninsdeletekey; Components: sc2k scurk
 
 Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Windows"; ValueType: string; ValueName: "Display"; ValueData: "8 1"; Flags: uninsdeletekey; Components: sc2k scurk
 Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Windows"; ValueType: dword; ValueName: "Color Check"; ValueData: "$00000000"; Flags: uninsdeletekey; Components: sc2k scurk
+Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Windows"; ValueType: dword; ValueName: "Last Color Depth"; ValueData: "$00000020"; Flags: uninsdeletekey; Components: sc2k scurk
 
 Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Paths"; ValueType: string; ValueName: "Movies"; ValueData: "{app}\Movies"; Flags: uninsdeletekey; Components: sc2k
 Root: HKCU; Subkey: "Software\Maxis\SimCity 2000\Options"; ValueType: dword; ValueName: "Speed"; ValueData: "$00000001"; Flags: uninsdeletekey; Components: sc2k
@@ -186,17 +192,30 @@ begin
   end;
 end;
 
+function GetUserDataInstallDirectory(Value: string): string;
+begin
+  case Value of
+    'distributed' : Result := ExpandConstant('{userdocs}\SimCity 2000 Special Edition');
+    'combined' : Result := ExpandConstant('{app}');
+  else
+    begin
+      MsgBox('Unknown setup configuration.  Please update the configuration and recompile.', mbCriticalError, MB_OK);
+      ExitProcess(0);
+    end;
+  end;
+end;
+
 procedure AddUserInfoPage;
 begin
   UserInfoPage := CreateInputQueryPage(wpWelcome,
-    'Enter Your Name', 'You may enter up to 22 characters per field.',
+    'Enter Your Name', '',
     'In SimCity 2000, you will become the fearless leader of many living sims.');
 
   UserInfoPage.Add('&Name:', False);
   UserInfoPage.Add('&Company:', False);
 
-  UserInfoPage.Values[0] := ExpandConstant('Sim Mayor');
-  UserInfoPage.Values[1] := ExpandConstant('Sim Company');
+  UserInfoPage.Values[0] := ExpandConstant('Marvin Maxis');
+  UserInfoPage.Values[1] := ExpandConstant('Q37 Space Modulator Mfg.');
 end;
 
 function OnDownloadProgress(const Url, FileName: String; const Progress, ProgressMax: Int64): Boolean;
@@ -961,10 +980,10 @@ begin
       finally
         DownloadPage.Hide;
       end;
-    end;
+end;
       
-    UserName := Copy(Trim(UserInfoPage.Values[0]), 1, 22);
-    UserCompany := Copy(Trim(UserInfoPage.Values[1]), 1, 22);
+    UserName := Trim(UserInfoPage.Values[0]);
+    UserCompany := Trim(UserInfoPage.Values[1]);
   end else
   begin
       Result := True;
@@ -975,9 +994,9 @@ procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
   if CurUninstallStep = usPostUninstall then
   begin
-    if RegKeyExists(HKEY_CURRENT_USER, 'Software\Maxis\SimCity 2000\WIN95\SC2Kfix') then
+    if RegKeyExists(HKEY_CURRENT_USER, 'Software\Maxis\SimCity 2000\SC2Kfix') then
     begin
-      RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'Software\Maxis\SimCity 2000\WIN95\SC2Kfix');
+      RegDeleteKeyIncludingSubkeys(HKEY_CURRENT_USER, 'Software\Maxis\SimCity 2000\SC2Kfix');
     end;
 
     if RegKeyExists(HKEY_CURRENT_USER, 'Software\Maxis\SimCity 2000') then
@@ -990,9 +1009,14 @@ begin
       RegDeleteKeyIfEmpty(HKEY_CURRENT_USER, 'Software\Maxis');
     end;
     
-    if MsgBox('Do you want to delete your cities and SCURK data?', mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+    DelTree(ExpandConstant('{app}'), True, True, True);
+    
+    if '{#InstallLocationType}' = 'distributed' then
     begin
-      DelTree(ExpandConstant('{userdocs}\SimCity 2000 Special Edition'), True, True, True);
+      if MsgBox('Do you want to delete your cities and SCURK data?', mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+      begin
+        DelTree(ExpandConstant('{userdocs}\SimCity 2000 Special Edition'), True, True, True);
+      end;
     end;
   end;
 end;
