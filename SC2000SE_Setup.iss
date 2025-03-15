@@ -980,7 +980,7 @@ begin
       finally
         DownloadPage.Hide;
       end;
-end;
+    end;
       
     UserName := Trim(UserInfoPage.Values[0]);
     UserCompany := Trim(UserInfoPage.Values[1]);
