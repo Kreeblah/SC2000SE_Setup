@@ -163,12 +163,12 @@ Type: files; Name: "{app}\winmm.dll"
 Type: files; Name: "{app}\sc2kfix.log"
 Type: files; Name: "{app}\sc2kfix.ini"
 
-Type: filesandordirs; Name: "{app}\Scenario"
-Type: filesandordirs; Name: "{app}\Bitmaps"
-Type: filesandordirs; Name: "{app}\Data"
-Type: filesandordirs; Name: "{app}\Sounds"
-Type: filesandordirs; Name: "{app}\Goodies"
-Type: filesandordirs; Name: "{app}\Movies"
+Type: filesandordirs; Name: "{app}\SCENARIO"
+Type: filesandordirs; Name: "{app}\BITMAPS"
+Type: filesandordirs; Name: "{app}\DATA"
+Type: filesandordirs; Name: "{app}\SOUNDS"
+Type: filesandordirs; Name: "{app}\GOODIES"
+Type: filesandordirs; Name: "{app}\MOVIES"
 
 [Code]
 var
