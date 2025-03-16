@@ -1010,13 +1010,16 @@ begin
       RegDeleteKeyIfEmpty(HKEY_CURRENT_USER, 'Software\Maxis');
     end;
     
-    DelTree(ExpandConstant('{app}'), True, True, True);
-    
-    if '{#InstallLocationType}' = 'distributed' then
+    if MsgBox('Do you want to delete your cities and SCURK data?', mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
     begin
-      if MsgBox('Do you want to delete your cities and SCURK data?', mbConfirmation, MB_YESNO or MB_DEFBUTTON2) = IDYES then
+      if '{#InstallLocationType}' = 'distributed' then
       begin
         DelTree(ExpandConstant('{userdocs}\SimCity 2000 Special Edition'), True, True, True);
+      end else
+      begin
+        DelTree(ExpandConstant('{app}\CITIES'), True, True, True);
+        DelTree(ExpandConstant('{app}\SCURKART'), True, True, True);
+        RemoveDir(ExpandConstant('{app}'));
       end;
     end;
   end;
